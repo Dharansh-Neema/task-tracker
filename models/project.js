@@ -7,10 +7,12 @@ const projectSchema = new mongoose.Schema({
     },
     description: String,
     progress:    String,
-    tasks: { 
+    tasks: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'task' 
-    }
+    }]
 });
 
-module.exports = mongoose.model("project",projectSchema);
+module.exports = projectSchema;
+
+module.exports.ProjectModel = mongoose.model("project", projectSchema);

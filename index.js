@@ -3,10 +3,23 @@ const app = express();
 const db_connection = require("./config/db");
 // DOTENV config
 require('dotenv').config()
-
+//Common middleware
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+app.use(cookieParser())
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(express.json());
 // DB connection
 db_connection();
 
+//Router 
+const userRouter = require("./router/userrouter");
+app.use("/api/v1",userRouter);
 // PORT
 const PORT = process.env.PORT || 8080
 
