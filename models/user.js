@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcrypt");
-
+const projectSchema = require("../models/project");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -32,15 +32,15 @@ const userSchema = new mongoose.Schema({
         default : "India"
     },
 
-    projects: [{
-        name: String,
-        description: String,
-        progress: String,
-        tasks: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "task"
+    projects: {
+        type : [projectSchema],
+        validate: {
+            validator: function(v) {
+                return v.length <= 4;
+            },
+            message: 'You can only have up to 4 projects'
         }
-    }]
+    }
 });
 
 userSchema.pre("save",async function(next){
