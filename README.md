@@ -1,68 +1,104 @@
 # Task Tracker Application
 
-A full-stack task management application built with React, Express, and MongoDB.
+A full-stack task management application built with Node.js, Express, EJS, and MongoDB. This application allows users to manage projects and tasks with a clean, user-friendly interface.
 
 ## Features
 
-- User Authentication (JWT)
-- Project Management (up to 4 projects per user)
-- Task CRUD operations
-- Task progress tracking
-- User profile management
+- **User Authentication**
+  - Secure signup and login with JWT
+  - Cookie-based authentication
+  - Protected routes
+
+- **Project Management**
+  - Create up to 4 projects per user
+  - View all projects in a dashboard
+  - Project details and progress tracking
+
+- **Task Management**
+  - Create, read, update, and delete tasks
+  - Track task progress
+  - Organize tasks by project
+  - Task description and status management
 
 ## Tech Stack
-
-### Frontend
-- React.js
-- React Router
-- Axios
-- Tailwind CSS
 
 ### Backend
 - Node.js
 - Express.js
-- MongoDB
-- JWT Authentication
+- MongoDB with Mongoose
+- JWT for authentication
+
+### Frontend
+- EJS templating engine
+- Bootstrap for styling
+- JavaScript for interactivity
+
+### Security
+- bcrypt for password hashing
+- HTTP-only cookies
+- JWT token authentication
 
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js (v14 or higher)
+- Node.js
 - MongoDB
 
-### Backend Setup
-1. Navigate to the backend directory:
+### Installation
+1. Clone the repository:
    ```bash
-   cd backend
+   git clone https://github.com/yourusername/task-tracker.git
+   cd task-tracker
    ```
+
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Create a .env file with the following variables:
+
+3. Create a `.env` file in the root directory with the following variables:
    ```
-   PORT=5000
+   PORT=8001
    MONGODB_URI=your_mongodb_uri
    JWT_SECRET=your_jwt_secret
    ```
-4. Start the server:
+
+4. Start the application:
    ```bash
    npm start
    ```
 
-### Frontend Setup
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm start
-   ```
+The application will be available at http://localhost:8001
 
-The application will be available at http://localhost:3000
-Task tracker application where a user can track progress on a project. It can have multiple users and each user can have up to 4 projects
+## Project Structure
+```
+task-tracker/
+├── controller/         # Route controllers
+├── middleware/        # Custom middleware
+├── models/            # MongoDB models
+├── public/            # Static files
+├── router/           # Route definitions
+├── utils/            # Utility functions
+├── views/            # EJS templates
+└── index.js          # Application entry point
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/v1/signup` - User registration
+- `POST /api/v1/login` - User login
+- `GET /api/v1/logout` - User logout
+
+### Projects
+- `POST /api/v1/projects` - Create a new project
+- `GET /api/v1/projects` - Get all user projects
+- `PUT /api/v1/projects/:id` - Update a project
+- `DELETE /api/v1/projects/:id` - Delete a project
+
+### Tasks
+- `POST /api/v1/tasks` - Create a new task
+- `GET /api/v1/tasks` - Get all tasks
+- `PUT /api/v1/tasks/:id` - Update a task
+- `DELETE /api/v1/tasks/:id` - Delete a task
+
