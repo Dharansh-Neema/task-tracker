@@ -35,12 +35,6 @@ const userSchema = new mongoose.Schema({
     projects: [{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'project',
-        validate: {
-            validator: function(v) {
-                return v.length <= 4;
-            },
-            message: 'You can only have up to 4 projects'
-        }
     }]
 });
 

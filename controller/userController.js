@@ -4,56 +4,63 @@ const bcrypt = require('bcrypt')
 
 exports.signup = async (req, res, next) => {
     try {
-        const { name, email, password,country } = req.body;
+        const { name, email, password, country } = req.body;
 
         if (!name || !email || !password) {
-            return res.status(400).json({ message: "Name, email or password fields are required" });
+            return res.status(400).render('signup', { 
+                error: "Name, email or password fields are required" 
+            });
         }
 
-        const user = await User.create({ name, email, password,country});
-        cookieToken(user,res);
+        const user = await User.create({ name, email, password, country});
+        cookieToken(user, res);
     }
     catch (error) {
-        res.status(500).json({ message:"Error while signup!",
-            error: error.message });
+        res.status(500).render('signup', { 
+            error: "Error while signing up: " + error.message 
+        });
     }
 };
 
 
-exports.login = async(req,res,next)=>{
+exports.login = async(req, res, next) => {
     try {
         const { email, password } = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ message: "Email or password fields are required" });
+            return res.status(400).render('login', { 
+                error: "Email or password fields are required" 
+            });
         }
 
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: "Invalid email or password" });
+            return res.status(401).render('login', { 
+                error: "Invalid email or password" 
+            });
         }
 
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
-            return res.status(401).json({ message: "Invalid email or password" });
+            return res.status(401).render('login', { 
+                error: "Invalid email or password" 
+            });
         }
 
         cookieToken(user, res);
     }
     catch (error) {
-        res.status(500).json({ message: "Error while login!",
-            error: error.message });
+        res.status(500).render('login', { 
+            error: "Error while logging in: " + error.message 
+        });
     }
 };
 
 
-exports.logout = async(req,res,next)=>{
-    res.cookie("token",null,{
+exports.logout = async(req, res, next) => {
+    res.cookie("token", null, {
         expires: new Date(Date.now()),
-        httpOnly:true
+        httpOnly: true
     });
-    res.status(200).json({
-        success: true,
-        message: "Logout successfully",
-      });
-}
+    res.redirect('/login');
+};
