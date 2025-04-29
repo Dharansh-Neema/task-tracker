@@ -93,12 +93,10 @@ task-tracker/
 ### Projects
 - `POST /api/v1/projects` - Create a new project
 - `GET /api/v1/projects` - Get all user projects
-- `PUT /api/v1/projects/:id` - Update a project
-- `DELETE /api/v1/projects/:id` - Delete a project
 
 ### Tasks
 - `POST /api/v1/tasks` - Create a new task
 - `GET /api/v1/tasks` - Get all tasks
-- `PUT /api/v1/tasks/:id` - Update a task
-- `DELETE /api/v1/tasks/:id` - Delete a task
+- `PUT /api/v1/tasks/` - Update a task
+- `DELETE /api/v1/tasks/` - Delete a task
 
