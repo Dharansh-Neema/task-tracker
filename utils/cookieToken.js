@@ -13,7 +13,6 @@ const cookieToken = (user,res)=>{
     })
     .json({
         success:true,
-        message:"User created successfully",
         user,
         token :token
     });

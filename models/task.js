@@ -7,12 +7,15 @@ const taskSchema = new mongoose.Schema({
     },
     description: String,
     progress:{ 
-        type: String, 
-        enum: ["Not Started","In Progress","Completed"] 
+        type: String,
     },
     project: { 
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'project' 
+    },
+    created_at:{
+        type : Date,
+        default : Date.now()
     }
 });
 

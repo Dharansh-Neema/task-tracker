@@ -8,18 +8,23 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
   })
 );
+
 app.use(express.json());
 // DB connection
 db_connection();
 
 //Router 
 const userRouter = require("./router/userrouter");
-app.use("/api/v1",userRouter);
+const projectRouter = require("./router/projectRouter");
+
+app.use("/api/v1", userRouter);
+app.use("/api/v1/projects", projectRouter);
 // PORT
 const PORT = process.env.PORT || 8080
 
